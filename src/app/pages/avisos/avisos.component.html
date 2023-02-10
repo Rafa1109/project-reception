@@ -1,0 +1,74 @@
+<base-content>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <div class="">
+                    <h2 class="d-none d-md-block text-center text-md-left">Tabela de Avisos!</h2>
+                </div>
+            </div>
+            <div class="col-12 d-none d-md-block">
+                <p-divider></p-divider>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <div class="col-12 col-md-8"></div>
+                <div class="mb-3 col-12 col-md-4 d-md-block">
+                    <p-button label="Adicionar Aviso" (onClick)="addAviso()"></p-button>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 pr-0">
+                        <p-table #table styleClass="p-datatable-striped" responsiveLayout="scroll" [rows]="10"
+                            [paginator]="true" [rowHover]="true" [value]="avisos" [lazy]="true" [totalRecords]="10"
+                            [rowsPerPageOptions]="[10, 20, 30, 40]" [globalFilterFields]="[
+                            'tipo',
+                            'nome',
+                            'acao'
+                         ]" dataKey="id">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="aviso.tipo">
+                                        <p>
+                                            Categoria<p-sortIcon field="aviso.tipo"></p-sortIcon>
+                                        </p>
+                                    </th>
+                                    <th pSortableColumn="aviso.nome">
+                                        <p>
+                                            Nome <p-sortIcon field="aviso.nome"></p-sortIcon>
+                                        </p>
+                                    </th>
+                                    <th pSortableColumn="acoes">
+                                        <p>Ações</p>
+                                    </th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-aviso>
+                                <tr>
+                                    <td>{{ aviso.tipo }}</td>
+                                    <td>{{ aviso.nome }}</td>
+                                    <td>
+                                        <div class="col-12 d-inline-flex">
+                                            <div class="col-12 col-md-3 mr-5">
+                                                <p-button styleClass="w-full p-button-outlined mr-5" label="Visualizar"></p-button>
+                                            </div>
+                                            <div class="col-12 col-md-3 mr-5">
+                                                <p-button styleClass="w-full" label="Editar"></p-button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</base-content>

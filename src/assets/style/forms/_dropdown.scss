@@ -1,0 +1,50 @@
+p-dropdown.p-element.p-inputwrapper {
+    .p-dropdown.p-component {
+      border-radius: 50px;
+      border: 1px solid $grey2;
+    }
+  }
+  
+  .p-dropdown-panel {
+    font-size: 13px !important;
+    font-family: $font-family;
+    @media (max-width: 999px) {
+      font-size: 10px !important;
+    }
+  }
+  
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+    color: $white;
+    background: $primary;
+  }
+  
+  .p-dropdown-label {
+    padding: 10px;
+    font-size: 12px !important;
+    line-height: 14px;
+    font-family: $font-family;
+  }
+  
+  .p-dropdown-label.p-placeholder {
+    padding: 10px;
+    font-size: 13px !important;
+    font-family: $font-family;
+  }
+  
+  .input-to-label {
+    .field {
+      select,
+      p-dropdown.p-element.p-inputwrapper .p-dropdown.p-component {
+        pointer-events: none;
+        padding-left: 1px;
+        padding-top: 0px;
+        margin-top: 0px;
+        border: 0px;
+  
+        .p-dropdown-trigger {
+          display: none;
+        }
+      }
+    }
+  }
+  

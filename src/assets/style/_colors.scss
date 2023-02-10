@@ -1,0 +1,58 @@
+@use "./_variables.scss" as bs-color;
+
+$sizes: (
+    "": 0px,
+    "-md": 798px,
+);
+$total-border: 10;
+
+$sides: (
+    "": "",
+    "-bottom": "-bottom",
+    "-top": "-top",
+    "-left": "-left",
+    "-right": "-right",
+);
+
+@each $sizename, $sizevalue in $sizes {
+    @each $name, $value in bs-color.$base-colors {
+        .dep-color#{"" + $sizename}#{"-" + $name} {
+            @media (min-width: $sizevalue) {
+                color: $value !important;
+
+                &:hover {
+                    color: $value;
+                }
+            }
+        }
+
+        .dep-bg-color#{"" + $sizename}#{"-" + $name} {
+            @media (min-width: $sizevalue) {
+                background-color: $value !important;
+            }
+        }
+
+        .dep-bg-hover#{"" + $sizename}#{"-" + $name}:hover {
+            @media (min-width: $sizevalue) {
+                background-color: $value !important;
+            }
+        }
+
+        .dep-border-color#{"" + $sizename}#{"-" + $name} {
+            @media (min-width: $sizevalue) {
+                border-color: $value !important;
+            }
+        }
+    }
+
+    @each $side, $sideV in $sides {
+        @for $i from 0 through $total-border {
+            .dep-border#{"" + $side}#{"" + $sizename}#{"-" + $i} {
+                @media (min-width: $sizevalue) {
+                    border#{"" + $side}-width: #{$i}px;
+                    border#{"" + $side}-style: solid;
+                }
+            }
+        }
+    }
+}

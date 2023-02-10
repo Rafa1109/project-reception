@@ -1,0 +1,35 @@
+.cursor {
+    cursor: pointer;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.w-full {
+    width: 100% !important;
+}
+
+.max-h-full {
+    max-height: 100%;
+}
+  
+.max-w-full {
+   max-width: 100% !important;
+}
+
+.field {
+   margin-bottom: 0.2rem;
+}
+  
+.field-textarea {
+    height: 105px;
+    width: 100%;
+    overflow: hidden;
+    outline: none !important;
+    resize: none;
+    border: 1px solid #ced4da;
+    border-radius: 1rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+}

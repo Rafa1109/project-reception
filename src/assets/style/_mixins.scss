@@ -1,0 +1,18 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
+}
+
+@mixin defaultFontFamily {
+  font-family: $font-family;
+  font-weight: normal;
+}
+
+@mixin defaultFormLabel {
+  @include defaultFontFamily;
+  font-weight: 600;
+  color: $black2;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 18px;
+}

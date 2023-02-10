@@ -72,6 +72,12 @@
                   "maximumError": "4kb"
                 }
               ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
@@ -80,18 +86,45 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "guest-api:build",
+            "proxyConfig": "src/proxy.config.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "project-reception:build:production"
             },
             "development": {
+              "browserTarget": "project-reception:build:development"
+            },
+            "local": {
               "browserTarget": "project-reception:build:development"
             }
           },
@@ -105,5 +138,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c4208ac1-8e8d-4eea-9281-ac7d5cff1cf2"
   }
 }
