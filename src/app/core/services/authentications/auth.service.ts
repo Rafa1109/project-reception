@@ -9,7 +9,7 @@ import { LocalStorageService } from "./local-storage.service";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     private currentUserSubject: BehaviorSubject<any>;
-    private currentUser: Observable<any>;
+    public currentUser: Observable<any>;
     result: any;
 
     constructor(
@@ -45,7 +45,7 @@ export class AuthService {
             map((result: any) => {
                 this.localStorage.saveData('currentUser', result);
                 this.currentUserSubject.next(result);
-                this.tokenDetails(result)
+                this.tokenDetails(result.token)
                 return result;
             })
         )
