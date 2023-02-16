@@ -14,7 +14,7 @@
 
     <div class="col-12">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" *ngIf="canAdd">
                 <div class="col-12 col-md-8"></div>
                 <div class="mb-3 col-12 col-md-4 d-md-block">
                     <p-button label="Adicionar Aviso" (onClick)="addAviso()"></p-button>
@@ -24,23 +24,24 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-12 pr-0">
-                        <p-table #table styleClass="p-datatable-striped" responsiveLayout="scroll" [rows]="10"
-                            [paginator]="true" [rowHover]="true" [value]="avisos" [lazy]="true" [totalRecords]="10"
-                            [rowsPerPageOptions]="[10, 20, 30, 40]" [globalFilterFields]="[
-                            'tipo',
-                            'nome',
-                            'acao'
-                         ]" dataKey="id">
+                        <p-table #table 
+                            styleClass="p-datatable-striped" 
+                            responsiveLayout="scroll" 
+                            [rows]="10"
+                            [paginator]="true" 
+                            [rowHover]="true" 
+                            [value]="avisos" 
+                            [lazy]="true" 
+                            
+                            [totalRecords]="10"
+                            [rowsPerPageOptions]="[10, 20, 30, 40]" 
+                            [globalFilterFields]="[ 'tipo' ]" 
+                            dataKey="id">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="aviso.tipo">
+                                    <th pSortableColumn="aviso.guest.guestType">
                                         <p>
-                                            Categoria<p-sortIcon field="aviso.tipo"></p-sortIcon>
-                                        </p>
-                                    </th>
-                                    <th pSortableColumn="aviso.nome">
-                                        <p>
-                                            Nome <p-sortIcon field="aviso.nome"></p-sortIcon>
+                                            Categoria<p-sortIcon field="aviso.guest.guestType"></p-sortIcon>
                                         </p>
                                     </th>
                                     <th pSortableColumn="acoes">
@@ -48,11 +49,9 @@
                                     </th>
                                 </tr>
                             </ng-template>
-
                             <ng-template pTemplate="body" let-aviso>
                                 <tr>
                                     <td>{{ aviso.tipo }}</td>
-                                    <td>{{ aviso.nome }}</td>
                                     <td>
                                         <div class="col-12 d-inline-flex">
                                             <div class="col-12 col-md-3 mr-5">

@@ -52,14 +52,23 @@ export class LoginComponent extends BaseForm implements OnInit {
         this.loading[0] = true;
         this.authService.login(this.loginCommand.login ?? "", this.loginCommand.password ?? "").subscribe({
             next: (result) => {
-                console.log('result login', result)
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Login Realizado com sucesso',
                     detail: 'Redirecionando página',
                     life: 3000
                 })
-            }, complete: () => {
+            }, error: (e) => {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Erro ao realizar login',
+                    detail: 'Usuário ou senha inválidos',
+                    life: 3000
+                })
+                this.loading[0] = false;
+            },
+            complete: () => {
+                this.loading[0] = false
                 this.route.navigate([`avisos`]);
             }
         })    

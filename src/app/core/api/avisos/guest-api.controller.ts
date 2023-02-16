@@ -12,7 +12,6 @@ export class GuestApi {
     constructor(private http: HttpClient) {}
 
     login(loginCommand: any): Observable<any> {
-        console.log('base', [this._baseUrl, loginCommand]);
         return this.http.post<any>(`${this._baseUrl}/auth/login`, loginCommand);
     }
 
