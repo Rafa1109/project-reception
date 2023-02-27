@@ -14,6 +14,8 @@ import { ENUMS } from "src/app/core/enum";
 export class FormAvisosComponent extends BaseForm implements OnInit {
 
     avisoForm: AvisoCommand = new AvisoCommand();
+    styleClass: string = '';
+    formEdit: any;
 
     tipoAvisos = [
         { id: ENUMS.VISITANTE, tipo: 'VISITANTES' },
@@ -29,10 +31,17 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
         private guestApi: GuestApi
     ) {
         super();
+
+        let statePage = this.route.getCurrentNavigation()?.extras.state;
+        this.formEdit = statePage?.['data'] ?? null;
+        console.log('this', this.formEdit)
     }
 
     ngOnInit(): void {
         this.createForm();
+        if (this.formEdit) {
+            this.editAviso();
+        }
     }
 
     createForm = () => {
@@ -55,9 +64,15 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
         })
     }
 
+    editAviso = () => {
+        this.avisoForm = new AvisoCommand(this.formEdit);
+        console.log('avisoForm', this.avisoForm);
+    }
+
     selectedTipo: number = 0;
     onChangeTipo = (event: any) => {
-        this.selectedTipo = event.value
+        this.selectedTipo = event.value;
+        this.styleClass = 'style-custom-aniversario';
     }
 
     onSave = () => {

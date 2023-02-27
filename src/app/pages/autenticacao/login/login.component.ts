@@ -52,12 +52,15 @@ export class LoginComponent extends BaseForm implements OnInit {
         this.loading[0] = true;
         this.authService.login(this.loginCommand.login ?? "", this.loginCommand.password ?? "").subscribe({
             next: (result) => {
+                console.log('this.message', this.messageService);
                 this.messageService.add({
                     severity: 'success',
-                    summary: 'Login Realizado com sucesso',
-                    detail: 'Redirecionando página',
-                    life: 3000
-                })
+                    summary: 'Autenticado',
+                    detail: 'Redirecionando página!',
+                    life: 3000,
+                  });
+                  this.route.navigate([`avisos`]);
+                  this.loading[0] = false
             }, error: (e) => {
                 this.messageService.add({
                     severity: 'error',
@@ -65,11 +68,10 @@ export class LoginComponent extends BaseForm implements OnInit {
                     detail: 'Usuário ou senha inválidos',
                     life: 3000
                 })
+                console.log('cai aqui', this.messageService);
                 this.loading[0] = false;
             },
             complete: () => {
-                this.loading[0] = false
-                this.route.navigate([`avisos`]);
             }
         })    
     }

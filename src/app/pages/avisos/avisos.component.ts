@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { lastValueFrom } from "rxjs";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
@@ -12,19 +12,20 @@ import { AuthService } from "src/app/core/services/authentications/auth.service"
 })
 export class AvisosComponent extends BaseForm implements OnInit {
 
+    @ViewChild('mview') mview?: any;
+
     permissions = this.authService.currentUserTokenDetails;
 
     constructor(private route: Router,
         private guestApi: GuestApi,
-        private authService: AuthService)
-    {
+        private authService: AuthService) {
         super();
     }
-    
+
     canAdd: boolean = false;
     ngOnInit(): void {
-        this.canAdd = this.permissions?.roles.includes("ROLE_USER_WRITER");
-        this.lazyLoadTable(null);
+        this.canAdd = this.permissions?.roles?.includes("ROLE_USER_WRITER");
+        this.getData();
     }
 
     addAviso = () => {
@@ -33,14 +34,34 @@ export class AvisosComponent extends BaseForm implements OnInit {
 
     avisos: any[] = [];
     lazyLoadTable = (e: any) => {
-        console.log('e', e)
+        this.getData()
+    }
+
+    getData = () => {
         lastValueFrom(
             this.guestApi.findAll()
         ).then((res: any) => {
             console.log(res);
-            this.avisos = res;        
+            this.avisos = res.guests;
+            console.log('avisos', this.avisos)
         })
+    }
 
-        this.avisos.push({"tipo": "VISITANTES", "nome": "NOME TESTE"})
+    editAviso = (aviso: any) => {
+        this.route.navigate(['form-aviso'], {
+            state: { data: aviso }
+        })
+    }
+
+    aviso: AvisoCommand = new AvisoCommand();
+    title: string = 'Este é o aviso!';
+    modalView = (obj: any) => {
+        this.aviso = obj;
+        this.title = obj.guestType.toString();
+        this.mview.openModal();
+    }
+
+    closeModal = () => {
+        this.mview.closeModal();
     }
 }

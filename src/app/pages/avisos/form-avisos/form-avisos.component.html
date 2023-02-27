@@ -1,4 +1,4 @@
-<base-content>
+<base-content [styleClass]="styleClass">
     <div class="col-12">
         <form [formGroup]="form">
             <div class="row">
@@ -55,7 +55,7 @@
                     <div class="col-12 col-md-6">
                         <div class="field">
                             <label>Veio a convite de alguém?</label>
-                            <input type="text" pInputText class="w-full" formControlName="convidadoPor" [(ngModel)]="avisoForm.person.name">
+                            <input type="text" pInputText class="w-full" formControlName="convidadoPor" [(ngModel)]="avisoForm.person.invatedBy">
                         </div>
                     </div>
                 </div>

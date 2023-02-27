@@ -1,5 +1,5 @@
 body {
-    background-color: $secundaryClear;
+    background-color: $blue;
 }
 
 .content {
@@ -56,5 +56,12 @@ body {
 
     .logo {
       width: 200px !important;
+    }
+  }
+
+  .style-custom-aniversario {
+
+    .body {
+      background-color: $green2 !important;
     }
   }

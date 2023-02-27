@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
     selector: 'base-content',
@@ -6,8 +6,10 @@ import { Component, OnInit } from "@angular/core";
 })
 export class BaseContentComponent implements OnInit {
 
-    ngOnInit(): void {
+    @Input() styleClass: string = '';
 
+    ngOnInit(): void {
+        console.log('style', this.styleClass);
     }
 
 }

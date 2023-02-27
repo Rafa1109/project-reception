@@ -51,9 +51,23 @@ export class AuthService {
         )
     }
 
+    logout(): void {
+        this.localStorage.removeData('currentUser');
+        this.localStorage.removeData('user-token-details');
+
+        this.currentUserSubject.next(null);
+        this.router.navigate(['/login']).then(() => {
+            window.location.reload();
+        })
+    }
+
     tokenDetails(token: string): any {
         let decoded = this.decodeJwt.decodeJWT(token);
         this.localStorage.saveData('user-token-details', decoded ?? "");
         return decoded;
+    }
+
+    tokenExpire(): any {        
+        return this.decodeJwt.isTokenExpired(this.currentUserTokenDetails);
     }
 }

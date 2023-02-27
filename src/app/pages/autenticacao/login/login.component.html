@@ -31,7 +31,7 @@
                                 [class]="passwordView ? 'cursor pi pi-eye-slash' : 'cursor pi pi-eye'"
                                 class="dep-color-secundary"></i>
                             <input [attr.type]="passwordView ? 'text':'password'" formControlName="senha" class="w-full"
-                                pPassword [(ngModel)]="loginCommand.password"/>
+                                pPassword [(ngModel)]="loginCommand.password" [feedback]="false"/>
                         </span>
                     </div>
                 </div>

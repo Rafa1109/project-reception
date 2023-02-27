@@ -16,4 +16,18 @@ export class DecodedJwt {
             return null;
         }
     }
+
+    isTokenExpired(token: any): boolean {
+        try {
+          if (token.exp === undefined) {
+            return true;
+          }
+          const date = new Date(0);
+          date.setUTCSeconds(token.exp);
+          return date.valueOf() < new Date().valueOf();
+        } catch (err) {
+          return true;
+        }
+      }
+      
 }
