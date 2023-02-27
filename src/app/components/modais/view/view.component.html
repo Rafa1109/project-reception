@@ -1,7 +1,7 @@
 <p-dialog header="" [(visible)]="displayModal" [modal]="true" [style]="{ width: '800px' }" [draggable]="false"
     [resizable]="false">
 
-    <div class="d-flex justify-content-center align-items-center d-flex text-center flex-column">
+    <div class="d-flex justify-content-center align-items-center d-flex text-center flex-column mb-3">
         <b class="m-0 rth-color-secundary">{{ title }}</b>
     </div>
 
@@ -10,8 +10,14 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="label">
-                        <label>Nome: </label>
+                        <label>Tipo: </label>
                         <input pInputText [value]="form.guestType" disabled class="w-full"/>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Data: </label>
+                        <input pInputText [value]="form.createdDate" disabled class="w-full"/>
                     </div>
                 </div>
             </div>

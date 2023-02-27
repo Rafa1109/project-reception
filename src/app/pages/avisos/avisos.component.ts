@@ -56,7 +56,7 @@ export class AvisosComponent extends BaseForm implements OnInit {
     aviso: AvisoCommand = new AvisoCommand();
     title: string = 'Este é o aviso!';
     modalView = (obj: any) => {
-        this.aviso = obj;
+        this.aviso = new AvisoCommand(obj);
         this.title = obj.guestType.toString();
         this.mview.openModal();
     }
