@@ -48,9 +48,19 @@ export class AvisosComponent extends BaseForm implements OnInit {
     }
 
     editAviso = (aviso: any) => {
-        this.route.navigate(['form-aviso'], {
+        this.route.navigate(['form-aviso-edit'], {
             state: { data: aviso }
         })
+    }
+    
+    readAviso = (aviso: AvisoCommand) => {
+        console.log('onj', aviso)        
+        this.guestApi.announced(aviso.id).subscribe({
+            next: (result) => {
+                console.log('result', result)
+            }
+        })
+
     }
 
     aviso: AvisoCommand = new AvisoCommand();
@@ -61,7 +71,10 @@ export class AvisosComponent extends BaseForm implements OnInit {
         this.mview.openModal();
     }
 
-    closeModal = () => {
+    closeModal = (obj: any) => {
+        this.aviso = new AvisoCommand(obj);
+        this.readAviso(this.aviso)
         this.mview.closeModal();
+        window.location.reload();
     }
 }

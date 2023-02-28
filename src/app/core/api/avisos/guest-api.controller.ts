@@ -23,7 +23,7 @@ export class GuestApi {
         return this.http.get<any>(`${this._baseUrl}/find`);
     }
 
-    edit(id: number, command: any): Observable<any> {
+    edit(id: string, command: any): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/edit/${id}`, command);
     }
 
@@ -31,11 +31,11 @@ export class GuestApi {
         return this.http.post<any>(`${this._baseUrl}/save`, command);
     }
 
-    findById(id: number): Observable<any> {
+    findById(id: string): Observable<any> {
         return this.http.get<any>(`${this._baseUrl}/find/${id}`);
     }
 
-    announced(id: number): Observable<any> {
+    announced(id: string): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/announced/${id}`, null)
     }
 }

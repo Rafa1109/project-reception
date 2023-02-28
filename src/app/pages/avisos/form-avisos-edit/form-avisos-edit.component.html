@@ -1,0 +1,163 @@
+<base-content [styleClass]="styleClass">
+    <div class="col-12">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-12 col-md-12">
+                        <h3 class="d-none d-md-block text-center text-md-left">Editar aviso!</h3>
+                    </div>
+                    <div class="col-12 d-none d-md-block">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 col-md-6">
+                    <div class="field">
+                        <label>Tipo do Aviso: </label>
+                        <p-dropdown placeholder="Selecione o tipo de aviso" optionLabel="tipo" optionValue="id" formControlName="tipo"
+                            styleClass="w-full" [options]="tipoAvisos" (onChange)="onChangeTipo(avisoForm.guestType)" [(ngModel)]="avisoForm.guestType"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="field">
+                        <label>Data:</label>
+                        <p-calendar styleClass="w-full" formControlName="data" appendTo="body" dateFormat="dd/mm/yy"
+                            placeholder="DD/MM/AAAAA" inputId="data" [(ngModel)]="avisoForm.date"></p-calendar>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="selectedTipo === 5">
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome de Solicitante:</label>
+                            <input type="text" pInputText class="w-full" formControlName="nomePedido" [(ngModel)]="avisoForm.prayer.to">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Oração para: </label>
+                            <input type="text" pInputText class="w-full" formControlName="oracaoPara" [(ngModel)]="avisoForm.prayer.from">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="selectedTipo === 1">
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome do Visitante:</label>
+                            <input type="text" pInputText class="w-full" formControlName="visitante" [(ngModel)]="avisoForm.person.name" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Veio a convite de alguém?</label>
+                            <input type="text" pInputText class="w-full" formControlName="convidadoPor" [(ngModel)]="avisoForm.person.invatedBy">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Frenquenta alguma Igreja?</label>
+                            <div class="d-flex align-items-center cp-h">
+                                <div class="d-flex align-items-center mr-5">
+                                    <input formControlName="frenquentaIgreja" type="radio" name="frenquentaIgreja"
+                                        value="true" id="op1" [(ngModel)]="avisoForm.person.church.attend"/>
+                                    <label for="op1">Sim</label>
+                                </div>
+
+                                <div class="d-flex align-items-center ml-5">
+                                    <input formControlName="frenquentaIgreja" type="radio" name="frenquentaIgreja" [(ngModel)]="avisoForm.person.church.attend"
+                                        value="false" id="op2" />
+                                    <label for="op2">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome da Igreja: </label>
+                            <input type="text" pInputText class="w-full" formControlName="igreja" [(ngModel)]="avisoForm.person.church.name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="selectedTipo === 6">
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome dos Pais:</label>
+                            <input type="text" pInputText class="w-full" formControlName="pais" [(ngModel)]="avisoForm.presentation.parents">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome da Criança: </label>
+                            <input type="text" pInputText class="w-full" formControlName="crianca" [(ngModel)]="avisoForm.presentation.children">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="selectedTipo === 3">
+                <div class="row mt-4">
+                    <div class="col-12 col-md-3">
+                        <div class="field">
+                            <label>Tipo de Aniversário</label>
+                            <div class="d-flex align-items-center cp-h">
+                                <div class="d-flex align-items-center mr-5">
+                                    <input formControlName="tipoAniversário" type="radio" name="tipoAniversário"
+                                        value="1" id="op1" [(ngModel)]="avisoForm.person.birthday.type" />
+                                    <label for="op1">Casamento</label>
+                                </div>
+
+                                <div class="d-flex align-items-center ml-5">
+                                    <input formControlName="tipoAniversário" type="radio" name="tipoAniversário"
+                                        value="2" id="op2" [(ngModel)]="avisoForm.person.birthday.type" />
+                                    <label for="op2">Vida</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="field">
+                            <label>Quantos anos?: </label>
+                            <input type="text" mask="00" pInputText class="w-full" formControlName="idade" [(ngModel)]="avisoForm.person.birthday.age">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome do Casal ou Aniversariante: </label>
+                            <input type="text" pInputText class="w-full" formControlName="aniversariante" [(ngModel)]="avisoForm.person.name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12 col-md-12">
+                    <div class="field">
+                        <label>Descrição: </label>
+                        <textarea maxlength="1254" class="field-textarea w-full" name="message"
+                            formControlName="message" [(ngModel)]="avisoForm.message">
+                    </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <div class="row">
+                    <div class="col-12 col-md-2 mb-3">
+                        <p-button styleClass="w-full p-button-outlined" (onClick)="back()" label="Voltar"></p-button>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <p-button styleClass="w-full" (onClick)="onSave()" label="Enviar"></p-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</base-content>
