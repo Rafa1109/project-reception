@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
+import { MessageService } from "primeng/api";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
 import { AvisoCommand } from "src/app/core/api/avisos/command/avisos.command";
 import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
@@ -14,7 +15,6 @@ import { ENUMS } from "src/app/core/enum";
 export class FormAvisosComponent extends BaseForm implements OnInit {
 
     avisoForm: AvisoCommand = new AvisoCommand();
-    styleClass: string = '';
     formEdit: any;
 
     tipoAvisos = [
@@ -28,13 +28,13 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     constructor(
         private fb: UntypedFormBuilder,
         private route: Router,
-        private guestApi: GuestApi
+        private guestApi: GuestApi,
+        private messageService: MessageService
     ) {
         super();
 
         let statePage = this.route.getCurrentNavigation()?.extras.state;
         this.formEdit = statePage?.['data'] ?? null;
-        console.log('this', this.formEdit)
     }
 
     ngOnInit(): void {
@@ -66,20 +66,29 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
 
     editAviso = () => {
         this.avisoForm = new AvisoCommand(this.formEdit);
-        console.log('avisoForm', this.avisoForm);
     }
 
     selectedTipo: number = 0;
     onChangeTipo = (event: any) => {
         this.selectedTipo = event.value;
-        this.styleClass = 'style-custom-aniversario';
     }
 
+    laoding: boolean[] = [false];
     onSave = () => {
-        console.log('command', this.avisoForm)        
+        console.log('command', this.avisoForm);
+        this.laoding[0] = true;
         this.guestApi.save(this.avisoForm).subscribe({
             next: (result) => {
-                console.log('result', result)
+                console.log('result', result);
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Salvo com sucesso!',
+                    detail: 'Redirecionando Página!',
+                    life: 3000
+                })
+                this.route.navigate(['avisos']);
+            }, complete: () => {
+                this.laoding[0] = false;
             }
         })
     }

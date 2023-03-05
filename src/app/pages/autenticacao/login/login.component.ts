@@ -36,6 +36,9 @@ export class LoginComponent extends BaseForm implements OnInit {
             login: ['', [Validators.required]],
             senha: ['', [Validators.required]]
         });
+
+        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+        console.log('mesa', this.messageService);
     }
 
     passwordView: boolean = false;
@@ -45,6 +48,10 @@ export class LoginComponent extends BaseForm implements OnInit {
 
     onBlur(input: string) {
         this.checkValidity(input);
+    }
+
+    showMessage = () => {
+        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
     }
 
     loading: boolean[] = [false];

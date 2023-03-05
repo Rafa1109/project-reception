@@ -1,4 +1,4 @@
-<base-content [styleClass]="styleClass">
+<base-content>
     <div class="col-12">
         <form [formGroup]="form">
             <div class="row">
@@ -154,7 +154,7 @@
                         <p-button styleClass="w-full p-button-outlined" (onClick)="back()" label="Voltar"></p-button>
                     </div>
                     <div class="col-12 col-md-2">
-                        <p-button styleClass="w-full" (onClick)="onSave()" label="Enviar"></p-button>
+                        <p-button styleClass="w-full" (onClick)="onSave()" label="Enviar" [loading]="laoding[0]"></p-button>
                     </div>
                 </div>
             </div>

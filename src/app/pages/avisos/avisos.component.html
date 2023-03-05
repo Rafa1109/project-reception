@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-12 pr-0 table-responsive">
             <p-table #table styleClass="p-datatable-striped" [rows]="10" [paginator]="true" [rowHover]="true"
-              [value]="avisos" [lazy]="true" (onLazyLoad)="lazyLoadTable($event)" [totalRecords]="10"
+              [value]="avisos" [lazy]="true" (onLazyLoad)="lazyLoadTable($event)" [totalRecords]="totalItems"
               [rowsPerPageOptions]="[10, 20, 30, 40]" [globalFilterFields]="['tipo']" dataKey="id"
               responsiveLayout="collapse">
               <ng-template pTemplate="header">

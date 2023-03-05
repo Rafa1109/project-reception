@@ -12,7 +12,7 @@ export class AvisoCommand {
         this.prayer = new PrayerCommand(data?.prayer) || null;
         this.presentation = new PresentationCommand(data?.presentation) || null;
         this.message = data?.message
-        this.id = data?.id;
+        this.id = data?.id ?? null;
         this.createdDate = data?.createdDate ? moment(data?.createdDate).format("DD/MM/YYYY") : undefined;
         this.announced = data?.announced;
         this.guestTypeDesc = this.tratarAvisoCommand(data?.guestType);
