@@ -9,9 +9,9 @@ import { ENUMS } from "src/app/core/enum";
 
 @Component({
     selector: 'app-form-avisos',
-    templateUrl: './form-avisos.component.html'
+    templateUrl: './form-avisos-edit.component.html'
 })
-export class FormAvisosComponent extends BaseForm implements OnInit {
+export class FormAvisosEditComponent extends BaseForm implements OnInit {
 
     avisoForm: AvisoCommand = new AvisoCommand();
     styleClass: string = '';
@@ -67,17 +67,18 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     editAviso = () => {
         this.avisoForm = new AvisoCommand(this.formEdit);
         console.log('avisoForm', this.avisoForm);
+        this.onChangeTipo(this.avisoForm.guestType)
     }
 
     selectedTipo: number = 0;
-    onChangeTipo = (event: any) => {
-        this.selectedTipo = event.value;
+    onChangeTipo = (guestType: number) => {
+        this.selectedTipo = guestType;
         this.styleClass = 'style-custom-aniversario';
     }
 
     onSave = () => {
         console.log('command', this.avisoForm)        
-        this.guestApi.save(this.avisoForm).subscribe({
+        this.guestApi.edit(this.avisoForm.id, this.avisoForm).subscribe({
             next: (result) => {
                 console.log('result', result)
                 this.back()
