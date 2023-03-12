@@ -51,7 +51,9 @@ export class LoginComponent extends BaseForm implements OnInit {
     }
 
     showMessage = () => {
-        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+        console.log('entrei')
+        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService', life: 3000});
+        console.log('entrei', this.messageService);
     }
 
     loading: boolean[] = [false];

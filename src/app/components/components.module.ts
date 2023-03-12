@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { DialogModule } from "primeng/dialog";
 import { PrimeNGModules } from "../core/modules/primeng.module";
 import { BaseContentComponent } from "./base-content/base-content.component";
+import { LogoComponent } from "./logo/logo.component";
 import { ModalViewComponent } from "./modais/view/view.component";
 import { NavBarComponent } from "./navbar/navbar.component";
 
@@ -9,7 +10,8 @@ import { NavBarComponent } from "./navbar/navbar.component";
     declarations: [
         NavBarComponent,
         ModalViewComponent,
-        BaseContentComponent
+        BaseContentComponent,
+        LogoComponent
     ],
     imports: [
         PrimeNGModules,
@@ -18,7 +20,8 @@ import { NavBarComponent } from "./navbar/navbar.component";
     exports: [
         NavBarComponent,
         BaseContentComponent,
-        ModalViewComponent
+        ModalViewComponent,
+        LogoComponent
     ]
 })
 export class ComponentsModule { }

@@ -2,12 +2,13 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
-import { MessageService } from "primeng/api";
+import { ConfirmationService, MessageService } from "primeng/api";
 import { ComponentsModule } from "../components/components.module";
 import { PrimeNGModules } from "../core/modules/primeng.module";
 import { AutenticacaoComponent } from "./autenticacao/autenticacao.component";
 import { AvisosComponent } from "./avisos/avisos.component";
 import { FormAvisosComponent } from "./avisos/form-avisos/form-avisos.component";
+import {FormAvisosEditComponent} from "./avisos/form-avisos-edit/form-avisos-edit.component";
 
 const routes: Routes = [
     {
@@ -25,6 +26,10 @@ const routes: Routes = [
     {
         path: 'form-aviso',
         component: FormAvisosComponent
+    },
+    {
+        path: 'form-aviso-edit',
+        component: FormAvisosEditComponent
     }
 ]
 
@@ -32,7 +37,8 @@ const routes: Routes = [
     declarations: [
         AvisosComponent,
         AutenticacaoComponent,
-        FormAvisosComponent
+        FormAvisosComponent,
+        FormAvisosEditComponent
     ],
     imports: [
         PrimeNGModules,
@@ -40,8 +46,9 @@ const routes: Routes = [
         CommonModule,
         ReactiveFormsModule,
         ComponentsModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        PrimeNGModules
     ],
-    providers: [MessageService]
+    providers: [ConfirmationService, MessageService]
 })
 export class PagesModule { }
