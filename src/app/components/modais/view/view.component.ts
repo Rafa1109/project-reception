@@ -16,7 +16,6 @@ export class ModalViewComponent implements OnInit {
     @Output() onPrimaryClick = new EventEmitter();
 
     ngOnInit(): void {
-        
     }
 
     displayModal = false;
@@ -28,5 +27,13 @@ export class ModalViewComponent implements OnInit {
     primaryClick = () => {
         this.closeModal();
         this.onPrimaryClick.emit();
+    }
+
+    tratarValueType = (form: AvisoCommand) => {
+        let completeDesc = ''
+        if (form.guestType == 3)
+            completeDesc = form.person.birthday.type === 'LIFE' ? ' DE VIDA' : ' DE CASAMENTO';
+
+        return form.guestTypeDesc + completeDesc;
     }
 }

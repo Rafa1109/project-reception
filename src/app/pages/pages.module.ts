@@ -8,7 +8,6 @@ import { PrimeNGModules } from "../core/modules/primeng.module";
 import { AutenticacaoComponent } from "./autenticacao/autenticacao.component";
 import { AvisosComponent } from "./avisos/avisos.component";
 import { FormAvisosComponent } from "./avisos/form-avisos/form-avisos.component";
-import {FormAvisosEditComponent} from "./avisos/form-avisos-edit/form-avisos-edit.component";
 
 const routes: Routes = [
     {
@@ -22,23 +21,18 @@ const routes: Routes = [
     {
         path: 'avisos',
         component: AvisosComponent
-    },
+    }/*,
     {
         path: 'form-aviso',
         component: FormAvisosComponent
-    },
-    {
-        path: 'form-aviso-edit',
-        component: FormAvisosEditComponent
-    }
+    }*/
 ]
 
 @NgModule({
     declarations: [
         AvisosComponent,
         AutenticacaoComponent,
-        FormAvisosComponent,
-        FormAvisosEditComponent
+        FormAvisosComponent
     ],
     imports: [
         PrimeNGModules,

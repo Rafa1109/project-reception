@@ -14,7 +14,6 @@ export class NavBarComponent implements OnInit {
     tokenExpirou: any;
     ngOnInit(): void {
         this.tokenExpirou = this.authService.tokenExpire();
-        console.log('tokenExpirou', this.tokenExpirou);
     }
 
     redirectPage = () => {

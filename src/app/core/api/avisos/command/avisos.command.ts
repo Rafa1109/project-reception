@@ -37,7 +37,11 @@ export class AvisoCommand {
             case ENUMS.APRESENTACAO:
                 return "APRESENTAÇÃO";                
             case ENUMS.AVISO_RECADO:
-                return "AVISO / RECADO";                
+                return "AVISO / RECADO";
+            case ENUMS.ANIVERSARIO:
+                return "ANIVERSÁRIO";
+            case ENUMS.ORACAO:
+                return "ORAÇÃO";                
             default:
                 return;
         }

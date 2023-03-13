@@ -28,6 +28,6 @@ export class BirthdayCommand {
         this.age = data?.age;
     }
 
-    type: number;
+    type: string;
     age: number;
 }

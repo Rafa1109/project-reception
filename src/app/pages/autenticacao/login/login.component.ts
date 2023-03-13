@@ -36,9 +36,6 @@ export class LoginComponent extends BaseForm implements OnInit {
             login: ['', [Validators.required]],
             senha: ['', [Validators.required]]
         });
-
-        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
-        console.log('mesa', this.messageService);
     }
 
     passwordView: boolean = false;
@@ -50,26 +47,17 @@ export class LoginComponent extends BaseForm implements OnInit {
         this.checkValidity(input);
     }
 
-    showMessage = () => {
-        console.log('entrei')
-        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService', life: 3000});
-        console.log('entrei', this.messageService);
-    }
-
     loading: boolean[] = [false];
     login = () => {
         this.loading[0] = true;
         this.authService.login(this.loginCommand.login ?? "", this.loginCommand.password ?? "").subscribe({
-            next: (result) => {
-                console.log('this.message', this.messageService);
+            next: (result) => {                
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Autenticado',
                     detail: 'Redirecionando página!',
                     life: 3000,
                   });
-                  this.route.navigate([`avisos`]);
-                  this.loading[0] = false
             }, error: (e) => {
                 this.messageService.add({
                     severity: 'error',
@@ -77,12 +65,13 @@ export class LoginComponent extends BaseForm implements OnInit {
                     detail: 'Usuário ou senha inválidos',
                     life: 3000
                 })
-                console.log('cai aqui', this.messageService);
                 this.loading[0] = false;
             },
             complete: () => {
+                this.loading[0] = false
+                this.route.navigate([`avisos`]);
             }
-        })    
+        }) 
     }
 
 }

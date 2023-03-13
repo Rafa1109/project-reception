@@ -28,22 +28,7 @@
                 </div>
             </div>
 
-            <div *ngIf="selectedTipo === 5">
-                <div class="row mt-4">
-                    <div class="col-12 col-md-6">
-                        <div class="field">
-                            <label>Nome de Solicitante:</label>
-                            <input type="text" pInputText class="w-full" formControlName="nomePedido" [(ngModel)]="avisoForm.prayer.to">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="field">
-                            <label>Oração para: </label>
-                            <input type="text" pInputText class="w-full" formControlName="oracaoPara" [(ngModel)]="avisoForm.prayer.from">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- TIPO VISITANTE -->
             <div *ngIf="selectedTipo === 1">
                 <div class="row mt-4">
                     <div class="col-12 col-md-6">
@@ -86,23 +71,8 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="selectedTipo === 6">
-                <div class="row mt-4">
-                    <div class="col-12 col-md-6">
-                        <div class="field">
-                            <label>Nome dos Pais:</label>
-                            <input type="text" pInputText class="w-full" formControlName="pais" [(ngModel)]="avisoForm.presentation.parents">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="field">
-                            <label>Nome da Criança: </label>
-                            <input type="text" pInputText class="w-full" formControlName="crianca" [(ngModel)]="avisoForm.presentation.children">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+            <!-- TIPO ANIVERSÁRIO -->
             <div *ngIf="selectedTipo === 3">
                 <div class="row mt-4">
                     <div class="col-12 col-md-3">
@@ -138,6 +108,42 @@
                 </div>
             </div>
 
+            <!-- TIPO ORAÇÃO -->
+            <div *ngIf="selectedTipo === 4">
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome de Solicitante:</label>
+                            <input type="text" pInputText class="w-full" formControlName="nomePedido" [(ngModel)]="avisoForm.prayer.to">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Oração para: </label>
+                            <input type="text" pInputText class="w-full" formControlName="oracaoPara" [(ngModel)]="avisoForm.prayer.from">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TIPO APRESENTAÇÃO CRIANÇA -->
+            <div *ngIf="selectedTipo === 5">
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome dos Pais:</label>
+                            <input type="text" pInputText class="w-full" formControlName="pais" [(ngModel)]="avisoForm.presentation.parents">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome da Criança: </label>
+                            <input type="text" pInputText class="w-full" formControlName="crianca" [(ngModel)]="avisoForm.presentation.children">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row mt-4">
                 <div class="col-12 col-md-12">
                     <div class="field">
@@ -151,7 +157,7 @@
             <div class="col-12 mt-4">
                 <div class="row">
                     <div class="col-12 col-md-2 mb-3">
-                        <p-button styleClass="w-full p-button-outlined" (onClick)="back()" label="Voltar"></p-button>
+                        <p-button styleClass="w-full p-button-outlined" (onClick)="backGrid($event)" label="Voltar"></p-button>
                     </div>
                     <div class="col-12 col-md-2">
                         <p-button styleClass="w-full" (onClick)="onSave()" label="Enviar" [loading]="laoding[0]"></p-button>

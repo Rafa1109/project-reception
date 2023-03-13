@@ -1,4 +1,4 @@
-<base-content>
+<base-content  *ngIf="telaState == 'grid'">
   <div class="col-12">
     <div class="row">
       <div class="col-12 col-md-12">
@@ -24,10 +24,10 @@
       <div class="col-12">
         <div class="row">
           <div class="col-12 pr-0 table-responsive">
-            <p-table #table styleClass="p-datatable-striped" [rows]="10" [paginator]="true" [rowHover]="true"
-              [value]="avisos" [lazy]="true" (onLazyLoad)="lazyLoadTable($event)" [totalRecords]="totalItems"
-              [rowsPerPageOptions]="[10, 20, 30, 40]" [globalFilterFields]="['tipo']" dataKey="id"
-              responsiveLayout="collapse">
+            <p-table #table styleClass="p-datatable-striped" [rows]="7" [paginator]="true" [rowHover]="true"
+              [value]="avisos" [totalRecords]="totalItems"
+              [globalFilterFields]="['tipo']" dataKey="id" [showCurrentPageReport]="true"
+              responsiveLayout="scroll">
               <ng-template pTemplate="header">
                 <tr>
                   <th pSortableColumn="aviso.guestType">
@@ -42,7 +42,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-aviso>
                 <tr>
-                  <td>{{ aviso.guestType }}</td>
+                  <td>{{ aviso.guestTypeDesc }}</td>
                   <td>
                     <div class="col-8 d-flex">
                       <div class="col-12 col-md-3 mr-5">
@@ -64,6 +64,11 @@
     </div>
   </div>
 </base-content>
+
+<div *ngIf="telaState == 'formAvisos'">
+  <app-form-avisos [data]="formAviso" (onBack)="back($event)"></app-form-avisos>
+</div>
+
 <app-modal-view #mview [title]="title" [form]="aviso" labelPrimaryButton="Marcar como lido e fechar"
     (onPrimaryClick)="closeModal(aviso)">
 </app-modal-view>

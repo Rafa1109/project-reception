@@ -10,24 +10,113 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="label">
-                        <label>Tipo: </label>
-                        <input pInputText [value]="form.guestType" disabled class="w-full"/>
+                        <label>Tipo:</label>
+                        <input pInputText [value]="tratarValueType(form)" disabled class="w-full" />
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="label">
                         <label>Data: </label>
-                        <input pInputText [value]="form.createdDate" disabled class="w-full"/>
+                        <input pInputText [value]="form.createdDate" disabled class="w-full" />
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Tipo Visitante-->
+        <div class="col-12" *ngIf="form.guestType === 1">
+            <div class="row mt-4">
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Nome do Visitante:</label>
+                        <input pInputText [value]="form?.person?.name" disabled class="w-full" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6" *ngIf="form.person?.church?.attend">
+                    <div class="label">
+                        <label>Pertence a Igreja:</label>
+                        <input pInputText [value]="form?.person?.church?.name" disabled class="w-full" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6" *ngIf="!form.person?.church?.attend">
+                    <div class="label">
+                        <label>Frenquenta alguma igreja:</label>
+                        <input pInputText value="O convidado não frenquenta nenhuma igreja!" disabled class="w-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- TIPO ANIVERSARIO -->
+        <div class="col-12" *ngIf="form.guestType === 3">
+            <div class="row mt-4">
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Quantos anos:</label>
+                        <input pInputText [value]="form?.person?.birthday?.age + ' anos'" disabled class="w-full" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Nome do Casal:</label>
+                        <input pInputText [value]="form.person.name" disabled class="w-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIPO ORACAO -->
+        <div class="col-12" *ngIf="form.guestType === 4">
+            <div class="row mt-4">
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Nome do Solicitante:</label>
+                        <input pInputText [value]="form?.prayer?.from" disabled class="w-full" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Oração para:</label>
+                        <input pInputText [value]="form.prayer?.to" disabled class="w-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIPO APRESENTAÇÃO CRIANÇA -->
+        <div class="col-12" *ngIf="form.guestType === 5">
+            <div class="row mt-4">
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Nome dos Pais:</label>
+                        <input pInputText [value]="form?.presentation?.parents" disabled class="w-full" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Nome da criança:</label>
+                        <input pInputText [value]="form.presentation?.children" disabled class="w-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 col-md-12">
+                <div class="label">
+                    <label>Descrição:</label>
+                    <textarea class="w-full field-textarea" pInputTextarea disabled style="resize: none;" [value]="form.message"></textarea>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <ng-template pTemplate="footer">
         <div class="row d-flex justify-content-center align-items-center d-flex text-center flex-column">
             <div class="col-12 col-md-12 mb-3">
-                <p-button styleClass="dep-bg-color-blue3 dep-border-color-blue3" (onClick)="primaryClick()" [label]="labelPrimaryButton"></p-button>
+                <p-button styleClass="dep-bg-color-blue3 dep-border-color-blue3" (onClick)="primaryClick()"
+                    [label]="labelPrimaryButton"></p-button>
             </div>
         </div>
     </ng-template>

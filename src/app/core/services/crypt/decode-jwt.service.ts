@@ -9,7 +9,6 @@ export class DecodedJwt {
             const base64Url = token.split(".")[1];
             const base64 = base64Url.replace("-", "+").replace("_", "/");
             var json = JSON.parse(window.atob(base64));
-            console.log('json', json);
             return json;
         } catch (error) {
             console.error('Failed to decode JWT:', error);

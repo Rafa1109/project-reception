@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { UntypedFormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
@@ -17,6 +17,9 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     avisoForm: AvisoCommand = new AvisoCommand();
     formEdit: any;
 
+    @Input() data: any;
+    @Output() onBack = new EventEmitter();
+
     tipoAvisos = [
         { id: ENUMS.VISITANTE, tipo: 'VISITANTES' },
         { id: ENUMS.AVISO_RECADO, tipo: 'AVISOS / RECADOS' },
@@ -32,14 +35,11 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
         private messageService: MessageService
     ) {
         super();
-
-        let statePage = this.route.getCurrentNavigation()?.extras.state;
-        this.formEdit = statePage?.['data'] ?? null;
     }
 
     ngOnInit(): void {
         this.createForm();
-        if (this.formEdit) {
+        if (this.data) {
             this.editAviso();
         }
     }
@@ -65,36 +65,40 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     }
 
     editAviso = () => {
-        this.avisoForm = new AvisoCommand(this.formEdit);
+        this.avisoForm = new AvisoCommand(this.data);
     }
 
     selectedTipo: number = 0;
     onChangeTipo = (event: any) => {
+        this.avisoForm = new AvisoCommand();
+        
+        if (this.data)
+            this.avisoForm.id = this.data.id;
+
         this.selectedTipo = event.value;
+        this.avisoForm.guestType = this.selectedTipo;
     }
 
     laoding: boolean[] = [false];
     onSave = () => {
-        console.log('command', this.avisoForm);
         this.laoding[0] = true;
         this.guestApi.save(this.avisoForm).subscribe({
             next: (result) => {
-                console.log('result', result);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Salvo com sucesso!',
                     detail: 'Redirecionando Página!',
                     life: 3000
                 })
-                this.back()
             }, complete: () => {
                 this.laoding[0] = false;
-                this.back()
+                this.onBack.emit();
             }
         })
     }
 
-    back = () => {
-        this.route.navigate(['avisos'])
+    backGrid = (emitCall: any) => {
+        this.avisoForm = new AvisoCommand();
+        this.onBack.emit({});
     }
 }

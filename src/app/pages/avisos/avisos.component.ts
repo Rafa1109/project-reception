@@ -28,38 +28,33 @@ export class AvisosComponent extends BaseForm implements OnInit {
         this.getData();
     }
 
+    telaState: string = 'grid';
+    formAviso: any;
     addAviso = () => {
-        this.route.navigate(['form-aviso'])
+        this.formAviso = null;
+        this.telaState = 'formAvisos';
     }
 
     avisos: AvisoCommand[] = [];
-    lazyLoadTable = (e: any) => {
-        this.getData()
-    }
-
     totalItems: number = 0;
     getData = () => {
         lastValueFrom(
             this.guestApi.findAll()
         ).then((res: any) => {
-            console.log(res);
-            // this.avisos = res.guests;
+            this.avisos = [];
             res.guests.forEach((obj: any) => {
                 this.avisos.push(new AvisoCommand(obj));
             })
             this.totalItems = res.size;
-            console.log('avisos', this.avisos)
         })
     }
 
     editAviso = (aviso: any) => {
-        this.route.navigate(['form-aviso-edit'], {
-            state: { data: aviso }
-        })
+        this.formAviso = aviso;
+        this.telaState = 'formAvisos';
     }
-    
+
     readAviso = (aviso: AvisoCommand) => {
-        console.log('onj', aviso)        
         this.guestApi.announced(aviso.id).subscribe({
             next: (result) => {
                 console.log('result', result)
@@ -71,7 +66,7 @@ export class AvisosComponent extends BaseForm implements OnInit {
     aviso: AvisoCommand = new AvisoCommand();
     title: string = 'Este é o aviso!';
     modalView = (obj: any) => {
-        this.aviso = new AvisoCommand(obj);
+        this.aviso = obj;
         this.title = obj.guestTypeDesc;
         this.mview.openModal();
     }
@@ -81,5 +76,10 @@ export class AvisosComponent extends BaseForm implements OnInit {
         this.readAviso(this.aviso)
         this.mview.closeModal();
         window.location.reload();
+    }
+
+    back = (e: any) => {
+        this.telaState = 'grid';
+        this.getData();
     }
 }

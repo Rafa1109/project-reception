@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { DialogModule } from "primeng/dialog";
 import { PrimeNGModules } from "../core/modules/primeng.module";
@@ -16,6 +17,7 @@ import { NavBarComponent } from "./navbar/navbar.component";
     imports: [
         PrimeNGModules,
         DialogModule,
+        CommonModule
     ],
     exports: [
         NavBarComponent,
