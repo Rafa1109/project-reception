@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { DialogModule } from "primeng/dialog";
 import { PrimeNGModules } from "../core/modules/primeng.module";
 import { BaseContentComponent } from "./base-content/base-content.component";
+import { LoadingComponent } from "./loading/loading.component";
 import { LogoComponent } from "./logo/logo.component";
 import { ModalViewComponent } from "./modais/view/view.component";
 import { NavBarComponent } from "./navbar/navbar.component";
@@ -12,7 +13,8 @@ import { NavBarComponent } from "./navbar/navbar.component";
         NavBarComponent,
         ModalViewComponent,
         BaseContentComponent,
-        LogoComponent
+        LogoComponent,
+        LoadingComponent
     ],
     imports: [
         PrimeNGModules,
@@ -23,7 +25,8 @@ import { NavBarComponent } from "./navbar/navbar.component";
         NavBarComponent,
         BaseContentComponent,
         ModalViewComponent,
-        LogoComponent
+        LogoComponent,
+        LoadingComponent
     ]
 })
 export class ComponentsModule { }

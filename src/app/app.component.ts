@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { LoaderService } from './core/services/loader.service';
 
 @Component({
   selector: 'app-root',
   template: `
-    <app-navbar></app-navbar>
+    <app-loading [visible]="loaderService.isLoadingFromView"></app-loading>
     <router-outlet></router-outlet>
   `,
   styles: []
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit {
   
   constructor(private config: PrimeNGConfig, 
     private httpClient: HttpClient, 
-    private primengConfig: PrimeNGConfig) {
+    private primengConfig: PrimeNGConfig,
+    public loaderService: LoaderService) {
 
     }
 

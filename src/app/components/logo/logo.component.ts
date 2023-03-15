@@ -9,7 +9,6 @@ export class LogoComponent implements OnInit {
     constructor() {}
 
     @Input() class = ""
-    @Input() title = ""
 
     ngOnInit(): void {
     }

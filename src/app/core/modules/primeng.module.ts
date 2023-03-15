@@ -35,8 +35,9 @@ import { TabViewModule } from 'primeng/tabview';
 import { EditorModule } from 'primeng/editor';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PasswordModule } from "primeng/password";
-
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DialogModule } from 'primeng/dialog';
+import {MenubarModule} from 'primeng/menubar';
 
 @NgModule({
   declarations: [],
@@ -78,7 +79,9 @@ import { DialogModule } from 'primeng/dialog';
     TabMenuModule,
     TabViewModule,
     EditorModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ProgressSpinnerModule,
+    MenubarModule
   ],
   exports: [
     InputTextModule,
@@ -117,7 +120,9 @@ import { DialogModule } from 'primeng/dialog';
     TabMenuModule,
     TabViewModule,
     EditorModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ProgressSpinnerModule,
+    MenubarModule
   ],
   providers: [],
 })

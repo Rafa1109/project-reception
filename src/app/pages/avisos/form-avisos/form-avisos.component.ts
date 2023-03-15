@@ -37,6 +37,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
         super();
     }
 
+    title: string = 'Cadastre um novo aviso!'
     ngOnInit(): void {
         this.createForm();
         if (this.data) {
@@ -65,6 +66,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     }
 
     editAviso = () => {
+        this.title = 'Edição de aviso';
         this.avisoForm = new AvisoCommand(this.data);
     }
 

@@ -1,12 +1,13 @@
-<base-content  *ngIf="telaState == 'grid'">
+<app-navbar></app-navbar>
+<base-content *ngIf="telaState == 'grid'">
   <div class="col-12">
     <div class="row">
       <div class="col-12 col-md-12">
         <div class="">
-          <h2 class="d-none d-md-block text-center text-md-left">Tabela de Avisos!</h2>
+          <h2 class="d-md-block text-center text-md-left">Tabela de Avisos!</h2>
         </div>
       </div>
-      <div class="col-12 d-none d-md-block">
+      <div class="col-12 d-md-block">
         <p-divider></p-divider>
       </div>
     </div>
@@ -25,9 +26,8 @@
         <div class="row">
           <div class="col-12 pr-0 table-responsive">
             <p-table #table styleClass="p-datatable-striped" [rows]="7" [paginator]="true" [rowHover]="true"
-              [value]="avisos" [totalRecords]="totalItems"
-              [globalFilterFields]="['tipo']" dataKey="id" [showCurrentPageReport]="true"
-              responsiveLayout="scroll">
+              [value]="avisos" [totalRecords]="totalItems" [globalFilterFields]="['tipo']" dataKey="id"
+              [showCurrentPageReport]="true" responsiveLayout="scroll">
               <ng-template pTemplate="header">
                 <tr>
                   <th pSortableColumn="aviso.guestType">
@@ -45,12 +45,12 @@
                   <td>{{ aviso.guestTypeDesc }}</td>
                   <td>
                     <div class="col-8 d-flex">
-                      <div class="col-12 col-md-3 mr-5">
-                        <p-button styleClass="w-full p-button-outlined dep-border-color-blue3" (onClick)="modalView(aviso)"
-                          label="Visualizar"></p-button>
+                      <div>
+                        <p-button styleClass="w-full p-button-outlined dep-border-color-blue3"
+                          (onClick)="modalView(aviso)" label="Visualizar"></p-button>
                       </div>
-                      <div class="col-md-1"></div>
-                      <div class="col-12 col-md-3" *ngIf="canAdd">
+                      <p-divider layout="vertical" *ngIf="canAdd"></p-divider>
+                      <div *ngIf="canAdd">
                         <p-button styleClass="w-full" label="Editar" (onClick)="editAviso(aviso)"></p-button>
                       </div>
                     </div>
@@ -70,5 +70,5 @@
 </div>
 
 <app-modal-view #mview [title]="title" [form]="aviso" labelPrimaryButton="Marcar como lido e fechar"
-    (onPrimaryClick)="closeModal(aviso)">
+  (onPrimaryClick)="closeModal(aviso)">
 </app-modal-view>
