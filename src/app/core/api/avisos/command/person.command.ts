@@ -1,13 +1,13 @@
 export class PersonCommand {
     constructor(data?: any) {
         this.name = data?.name;
-        this.invatedBy = data?.invatedBy;
+        this.invitedBy = data?.invitedBy;
         this.church = data?.church || new ChurchCommand();
         this.birthday = new BirthdayCommand(data?.birthday);
     }
 
     name: string;
-    invatedBy: string;
+    invitedBy: string;
     church: ChurchCommand;
     birthday: BirthdayCommand;
 }
@@ -28,6 +28,6 @@ export class BirthdayCommand {
         this.age = data?.age;
     }
 
-    type: string;
+    type: number;
     age: number;
 }

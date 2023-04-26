@@ -27,12 +27,12 @@
           <div class="col-12 pr-0 table-responsive">
             <p-table #table styleClass="p-datatable-striped" [rows]="7" [paginator]="true" [rowHover]="true"
               [value]="avisos" [totalRecords]="totalItems" [globalFilterFields]="['tipo']" dataKey="id"
-              [showCurrentPageReport]="true" responsiveLayout="scroll">
+              [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} avisos" responsiveLayout="scroll">
               <ng-template pTemplate="header">
                 <tr>
-                  <th pSortableColumn="aviso.guestType">
+                  <th pSortableColumn="guestTypeDesc">
                     <p>
-                      Tipo<p-sortIcon field="aviso.guestType"></p-sortIcon>
+                      Tipo<p-sortIcon field="guestTypeDesc"></p-sortIcon>
                     </p>
                   </th>
                   <th pSortableColumn="acoes">
@@ -41,7 +41,7 @@
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-aviso>
-                <tr>
+                <tr [ngClass]="aviso.class">
                   <td>{{ aviso.guestTypeDesc }}</td>
                   <td>
                     <div class="col-8 d-flex">

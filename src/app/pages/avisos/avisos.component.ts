@@ -75,7 +75,7 @@ export class AvisosComponent extends BaseForm implements OnInit {
     readAviso = (aviso: AvisoCommand) => {
         this.guestApi.announced(aviso.id).subscribe({
             next: (result) => {
-                console.log('result', result)
+                this.requestsOnInit();
             }
         })
 
@@ -93,7 +93,6 @@ export class AvisosComponent extends BaseForm implements OnInit {
         this.aviso = new AvisoCommand(obj);
         this.readAviso(this.aviso)
         this.mview.closeModal();
-        window.location.reload();
     }
 
     back = (e: any) => {

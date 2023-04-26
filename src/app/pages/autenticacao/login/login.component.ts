@@ -36,6 +36,7 @@ export class LoginComponent extends BaseForm implements OnInit {
             login: ['', [Validators.required]],
             senha: ['', [Validators.required]]
         });
+        this.loginEnter();
     }
 
     passwordView: boolean = false;
@@ -46,6 +47,15 @@ export class LoginComponent extends BaseForm implements OnInit {
     onBlur(input: string) {
         this.checkValidity(input);
     }
+
+    loginEnter() {
+        document.addEventListener('keydown', function (e) {
+          if (e.key == 'Enter') {
+            let btn = document.getElementById('btnLogin');
+            btn?.click();
+          }
+        });
+      }
 
     loading: boolean[] = [false];
     login = () => {

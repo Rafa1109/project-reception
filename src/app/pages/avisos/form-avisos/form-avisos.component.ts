@@ -68,6 +68,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     editAviso = () => {
         this.title = 'Edição de aviso';
         this.avisoForm = new AvisoCommand(this.data);
+        this.selectedTipo = this.avisoForm.guestType;
     }
 
     selectedTipo: number = 0;

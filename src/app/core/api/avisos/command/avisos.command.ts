@@ -16,7 +16,7 @@ export class AvisoCommand {
         this.createdDate = data?.createdDate ? moment(data?.createdDate).format("DD/MM/YYYY") : undefined;
         this.announced = data?.announced;
         this.guestTypeDesc = this.tratarAvisoCommand(data?.guestType);
-
+        this.class = this.tratarClassAvisoCommand(data?.guestType);
     }
 
     guestType: number;
@@ -29,6 +29,7 @@ export class AvisoCommand {
     id: string;
     createdDate?: string;
     announced: boolean;
+    class?: string;
 
     tratarAvisoCommand = (guestType: number) => {
         switch (guestType) {
@@ -42,6 +43,21 @@ export class AvisoCommand {
                 return "ANIVERSÁRIO";
             case ENUMS.ORACAO:
                 return "ORAÇÃO";                
+            default:
+                return;
+        }
+    }
+
+    tratarClassAvisoCommand = (guestType: number) => {
+        switch (guestType) {
+            case ENUMS.VISITANTE:
+                return "visit";              
+            case ENUMS.AVISO_RECADO:
+                return "message";
+            case ENUMS.ANIVERSARIO:
+                return "birthday";
+            case ENUMS.ORACAO:
+                return "prayer";                
             default:
                 return;
         }
