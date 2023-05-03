@@ -36,6 +36,7 @@ export class LoginComponent extends BaseForm implements OnInit {
             login: ['', [Validators.required]],
             senha: ['', [Validators.required]]
         });
+        this.loginEnter();
     }
 
     passwordView: boolean = false;
@@ -47,6 +48,15 @@ export class LoginComponent extends BaseForm implements OnInit {
         this.checkValidity(input);
     }
 
+    loginEnter() {
+        document.addEventListener('keydown', function (e) {
+          if (e.key == 'Enter') {
+            let btn = document.getElementById('btnLogin');
+            btn?.click();
+          }
+        });
+      }
+
     loading: boolean[] = [false];
     login = () => {
         this.loading[0] = true;
@@ -54,10 +64,12 @@ export class LoginComponent extends BaseForm implements OnInit {
             next: (result) => {
                 this.messageService.add({
                     severity: 'success',
-                    summary: 'Login Realizado com sucesso',
-                    detail: 'Redirecionando página',
-                    life: 3000
-                })
+                    summary: 'Autenticado',
+                    detail: 'Redirecionando página!',
+                    life: 3000,
+                });
+                this.loading[0] = false
+                this.route.navigate([`avisos`]);
             }, error: (e) => {
                 this.messageService.add({
                     severity: 'error',
@@ -66,12 +78,8 @@ export class LoginComponent extends BaseForm implements OnInit {
                     life: 3000
                 })
                 this.loading[0] = false;
-            },
-            complete: () => {
-                this.loading[0] = false
-                this.route.navigate([`avisos`]);
             }
-        })    
+        })
     }
 
 }

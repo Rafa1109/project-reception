@@ -56,3 +56,8 @@
       }
     }
   }
+
+  input:disabled {
+    color: #080808;
+    opacity: 0.8 !important;
+  }

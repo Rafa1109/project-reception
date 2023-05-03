@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { UntypedFormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
+import { MessageService } from "primeng/api";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
 import { AvisoCommand } from "src/app/core/api/avisos/command/avisos.command";
 import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
@@ -14,6 +15,10 @@ import { ENUMS } from "src/app/core/enum";
 export class FormAvisosComponent extends BaseForm implements OnInit {
 
     avisoForm: AvisoCommand = new AvisoCommand();
+    formEdit: any;
+
+    @Input() data: any;
+    @Output() onBack = new EventEmitter();
 
     tipoAvisos = [
         { id: ENUMS.VISITANTE, tipo: 'VISITANTES' },
@@ -26,13 +31,18 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     constructor(
         private fb: UntypedFormBuilder,
         private route: Router,
-        private guestApi: GuestApi
+        private guestApi: GuestApi,
+        private messageService: MessageService
     ) {
         super();
     }
 
+    title: string = 'Cadastre um novo aviso!'
     ngOnInit(): void {
         this.createForm();
+        if (this.data) {
+            this.editAviso();
+        }
     }
 
     createForm = () => {
@@ -55,21 +65,43 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
         })
     }
 
-    selectedTipo: number = 0;
-    onChangeTipo = (event: any) => {
-        this.selectedTipo = event.value
+    editAviso = () => {
+        this.title = 'Edição de aviso';
+        this.avisoForm = new AvisoCommand(this.data);
+        this.selectedTipo = this.avisoForm.guestType;
     }
 
+    selectedTipo: number = 0;
+    onChangeTipo = (event: any) => {
+        this.avisoForm = new AvisoCommand();
+        
+        if (this.data)
+            this.avisoForm.id = this.data.id;
+
+        this.selectedTipo = event.value;
+        this.avisoForm.guestType = this.selectedTipo;
+    }
+
+    laoding: boolean[] = [false];
     onSave = () => {
-        console.log('command', this.avisoForm)        
+        this.laoding[0] = true;
         this.guestApi.save(this.avisoForm).subscribe({
             next: (result) => {
-                console.log('result', result)
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Salvo com sucesso!',
+                    detail: 'Redirecionando Página!',
+                    life: 3000
+                })
+            }, complete: () => {
+                this.laoding[0] = false;
+                this.onBack.emit();
             }
         })
     }
 
-    back = () => {
-        this.route.navigate(['avisos'])
+    backGrid = (emitCall: any) => {
+        this.avisoForm = new AvisoCommand();
+        this.onBack.emit({});
     }
 }

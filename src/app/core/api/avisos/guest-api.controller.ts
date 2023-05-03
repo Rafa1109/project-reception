@@ -23,19 +23,23 @@ export class GuestApi {
         return this.http.get<any>(`${this._baseUrl}/find`);
     }
 
-    edit(id: number, command: any): Observable<any> {
+    private edit(id: string, command: any): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/edit/${id}`, command);
     }
 
-    save(command: any): Observable<any> {
+    private create(command: any): Observable<any> {
         return this.http.post<any>(`${this._baseUrl}/save`, command);
     }
 
-    findById(id: number): Observable<any> {
+    save(command: any): Observable<any> {
+        return command.id == null ? this.create(command) : this.edit(command.id, command);
+    }
+    
+    findById(id: string): Observable<any> {
         return this.http.get<any>(`${this._baseUrl}/find/${id}`);
     }
 
-    announced(id: number): Observable<any> {
+    announced(id: string): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/announced/${id}`, null)
     }
 }

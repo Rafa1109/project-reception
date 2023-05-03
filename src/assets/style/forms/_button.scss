@@ -1,0 +1,29 @@
+button:focus {
+    outline: none !important;
+  }
+  
+  .p-component.p-datepicker-trigger,
+  .p-component.p-button {
+    color: $white;
+    font-size: 12px;
+    font-family: $font-family;
+    background-color: $blue3;
+    border-color: $blue3;
+    font-weight: normal;
+  
+    // justify-content: center;
+    &-outlined {
+      background-color: $white;
+      color: $blue4;
+    }
+  
+    &:not(.exit, .p-button-icon-only, .p-fileupload-choose) {
+      width: 100%;
+      height: 40px;
+    }
+  }
+  
+  .pi-chevron-left {
+    color: $blue;
+  }
+  

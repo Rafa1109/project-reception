@@ -115,7 +115,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "guest-api:build",
-            "proxyConfig": "src/proxy.config.json"
+            "proxyConfig": "src/proxy.config.json",
+            "disableHostCheck": true
           },
           "configurations": {
             "production": {
