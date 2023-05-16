@@ -14,7 +14,7 @@
             <div class="row mt-2">
                 <div class="col-12 col-md-6">
                     <div class="field">
-                        <label>Tipo do Aviso: </label>
+                        <label>Tipo do Aviso: <span class="required">*</span></label>
                         <p-dropdown placeholder="Selecione o tipo de aviso" optionLabel="tipo" optionValue="id" formControlName="tipo"
                             styleClass="w-full" [options]="tipoAvisos" (onChange)="onChangeTipo($event)" [(ngModel)]="avisoForm.guestType"></p-dropdown>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="row mt-4">
                     <div class="col-12 col-md-6">
                         <div class="field">
-                            <label>Nome do Visitante:</label>
+                            <label>Nome do Visitante: <span class="required">*</span></label>
                             <input type="text" pInputText class="w-full" formControlName="visitante" [(ngModel)]="avisoForm.person.name" />
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                 <div class="row mt-4">
                     <div class="col-12 col-md-6">
                         <div class="field">
-                            <label>Frenquenta alguma Igreja?</label>
+                            <label>Frenquenta alguma Igreja? <span class="required">*</span></label>
                             <div class="d-flex align-items-center cp-h">
                                 <div class="d-flex align-items-center mr-5">
                                     <input formControlName="frenquentaIgreja" type="radio" name="frenquentaIgreja"
@@ -77,7 +77,7 @@
                 <div class="row mt-4">
                     <div class="col-12 col-md-3">
                         <div class="field">
-                            <label>Tipo de Aniversário</label>
+                            <label>Tipo de Aniversário: <span class="required">*</span></label>
                             <div class="d-flex align-items-center cp-h">
                                 <div class="d-flex align-items-center mr-5">
                                     <input formControlName="tipoAniversário" type="radio" name="tipoAniversário"
@@ -95,13 +95,13 @@
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="field">
-                            <label>Quantos anos?: </label>
+                            <label>Quantos anos?: <span class="required">*</span></label>
                             <input type="text" mask="00" pInputText class="w-full" formControlName="idade" [(ngModel)]="avisoForm.person.birthday.age">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="field">
-                            <label>Nome do Casal ou Aniversariante: </label>
+                            <label>Nome do Casal ou Aniversariante: <span class="required">*</span></label>
                             <input type="text" pInputText class="w-full" formControlName="aniversariante" [(ngModel)]="avisoForm.person.name">
                         </div>
                     </div>
@@ -131,13 +131,13 @@
                 <div class="row mt-4">
                     <div class="col-12 col-md-6">
                         <div class="field">
-                            <label>Nome dos Pais:</label>
+                            <label>Nome dos Pais: <span class="required">*</span></label>
                             <input type="text" pInputText class="w-full" formControlName="pais" [(ngModel)]="avisoForm.presentation.parents">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="field">
-                            <label>Nome da Criança: </label>
+                            <label>Nome da Criança: <span class="required">*</span></label>
                             <input type="text" pInputText class="w-full" formControlName="crianca" [(ngModel)]="avisoForm.presentation.children">
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                         <p-button styleClass="w-full p-button-outlined" (onClick)="backGrid($event)" label="Voltar"></p-button>
                     </div>
                     <div class="col-12 col-md-2">
-                        <p-button styleClass="w-full" (onClick)="onSave()" label="Enviar" [loading]="laoding[0]"></p-button>
+                        <p-button styleClass="w-full" (onClick)="onSave()" label="Enviar" [disabled]="form.invalid" [loading]="laoding[0]"></p-button>
                     </div>
                 </div>
             </div>
