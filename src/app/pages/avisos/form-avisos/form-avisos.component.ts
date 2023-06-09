@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
+import { RequiredValidator, UntypedFormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
@@ -21,12 +21,18 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     @Output() onBack = new EventEmitter();
 
     tipoAvisos = [
-        { id: ENUMS.VISITANTE, tipo: 'VISITANTES' },
-        { id: ENUMS.AVISO_RECADO, tipo: 'AVISOS / RECADOS' },
-        { id: ENUMS.ANIVERSARIO, tipo: 'ANIVERSÁRIO' },
-        { id: ENUMS.ORACAO, tipo: 'PEDIDO DE ORAÇÃO' },
-        { id: ENUMS.APRESENTACAO, tipo: 'APRESENTAÇÃO CRIANÇA' }
+        { id: ENUMS.VISITANTE, name: 'visitante', tipo: 'VISITANTES' },
+        { id: ENUMS.AVISO_RECADO, name: 'aviso', tipo: 'AVISOS / RECADOS' },
+        { id: ENUMS.ANIVERSARIO, name: 'aniversario', tipo: 'ANIVERSÁRIO' },
+        { id: ENUMS.ORACAO, name: 'oracao', tipo: 'PEDIDO DE ORAÇÃO' },
+        { id: ENUMS.APRESENTACAO, name: 'apresentacao', tipo: 'APRESENTAÇÃO CRIANÇA' }
     ]
+
+    camposObrigatorios:{ [key: string]: string[] } = {
+        visitante: ["visitante", "frenquentaIgreja"],
+        aniversario: ["tipoAniversário", "idade", "aniversariante"],
+        apresentacao: ["crianca", "pais"]
+    }
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -47,7 +53,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
 
     createForm = () => {
         this.form = this.fb.group({
-            tipo: [''],
+            tipo: ['', [Validators.required]],
             data: [''],
             pais: [''],
             crianca: [''],
@@ -80,6 +86,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
 
         this.selectedTipo = event.value;
         this.avisoForm.guestType = this.selectedTipo;
+        this.updateValidators(this.camposObrigatorios[this.tipoAvisos.find((x: any) => x.id === event.value)?.name ?? ''] ?? [])
     }
 
     laoding: boolean[] = [false];
