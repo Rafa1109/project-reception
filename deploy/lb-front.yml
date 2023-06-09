@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-guest-front
+spec:
+  type: LoadBalancer
+  selector:
+    app: guest-front
+  ports:
+    - name: guest-front
+      port: 8080
+      nodePort: 30002

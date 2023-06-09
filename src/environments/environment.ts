@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  api: 'http://localhost:8080/api'
+  api: 'http://recepcao-adosasco.com.br:8080/api'
 };
 
 /*

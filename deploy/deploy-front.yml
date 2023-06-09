@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: guest-front
+  labels:
+    app: guest-front
+spec:
+  containers:
+  - name: guest-front
+    image: njaneto/project-reception:v1.0.0
+    ports:
+      - containerPort: 80
+      - containerPort: 8000
